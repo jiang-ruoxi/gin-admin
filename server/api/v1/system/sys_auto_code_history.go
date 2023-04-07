@@ -11,15 +11,7 @@ import (
 
 type AutoCodeHistoryApi struct{}
 
-// First
-// @Tags      AutoCode
-// @Summary   获取meta信息
-// @Security  ApiKeyAuth
-// @accept    application/json
-// @Produce   application/json
-// @Param     data  body      request.GetById                                            true  "请求参数"
-// @Success   200   {object}  response.Response{data=map[string]interface{},msg=string}  "获取meta信息"
-// @Router    /autoCode/getMeta [post]
+//First 获取meta信息
 func (a *AutoCodeHistoryApi) First(c *gin.Context) {
 	var info request.GetById
 	err := c.ShouldBindJSON(&info)
@@ -35,15 +27,7 @@ func (a *AutoCodeHistoryApi) First(c *gin.Context) {
 	response.OkWithDetailed(gin.H{"meta": data}, "获取成功", c)
 }
 
-// Delete
-// @Tags      AutoCode
-// @Summary   删除回滚记录
-// @Security  ApiKeyAuth
-// @accept    application/json
-// @Produce   application/json
-// @Param     data  body      request.GetById                true  "请求参数"
-// @Success   200   {object}  response.Response{msg=string}  "删除回滚记录"
-// @Router    /autoCode/delSysHistory [post]
+//Delete 删除回滚记录
 func (a *AutoCodeHistoryApi) Delete(c *gin.Context) {
 	var info request.GetById
 	err := c.ShouldBindJSON(&info)
@@ -60,15 +44,7 @@ func (a *AutoCodeHistoryApi) Delete(c *gin.Context) {
 	response.OkWithMessage("删除成功", c)
 }
 
-// RollBack
-// @Tags      AutoCode
-// @Summary   回滚自动生成代码
-// @Security  ApiKeyAuth
-// @accept    application/json
-// @Produce   application/json
-// @Param     data  body      systemReq.RollBack             true  "请求参数"
-// @Success   200   {object}  response.Response{msg=string}  "回滚自动生成代码"
-// @Router    /autoCode/rollback [post]
+//RollBack 回滚自动生成代码
 func (a *AutoCodeHistoryApi) RollBack(c *gin.Context) {
 	var info systemReq.RollBack
 	err := c.ShouldBindJSON(&info)
@@ -84,15 +60,7 @@ func (a *AutoCodeHistoryApi) RollBack(c *gin.Context) {
 	response.OkWithMessage("回滚成功", c)
 }
 
-// GetList
-// @Tags      AutoCode
-// @Summary   查询回滚记录
-// @Security  ApiKeyAuth
-// @accept    application/json
-// @Produce   application/json
-// @Param     data  body      systemReq.SysAutoHistory                                true  "请求参数"
-// @Success   200   {object}  response.Response{data=response.PageResult,msg=string}  "查询回滚记录,返回包括列表,总数,页码,每页数量"
-// @Router    /autoCode/getSysHistory [post]
+//GetList 查询回滚记录
 func (a *AutoCodeHistoryApi) GetList(c *gin.Context) {
 	var search systemReq.SysAutoHistory
 	err := c.ShouldBindJSON(&search)

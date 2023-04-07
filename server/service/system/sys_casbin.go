@@ -13,16 +13,11 @@ import (
 	"sync"
 )
 
-//@author: [piexlmax](https://github.com/piexlmax)
-//@function: UpdateCasbin
-//@description: 更新casbin权限
-//@param: authorityId string, casbinInfos []request.CasbinInfo
-//@return: error
-
 type CasbinService struct{}
 
 var CasbinServiceApp = new(CasbinService)
 
+//UpdateCasbin 更新casbin权限
 func (casbinService *CasbinService) UpdateCasbin(AuthorityID uint, casbinInfos []request.CasbinInfo) error {
 	authorityId := strconv.Itoa(int(AuthorityID))
 	casbinService.ClearCasbin(0, authorityId)
@@ -42,12 +37,7 @@ func (casbinService *CasbinService) UpdateCasbin(AuthorityID uint, casbinInfos [
 	return nil
 }
 
-//@author: [piexlmax](https://github.com/piexlmax)
-//@function: UpdateCasbinApi
-//@description: API更新随动
-//@param: oldPath string, newPath string, oldMethod string, newMethod string
-//@return: error
-
+//UpdateCasbinApi API更新随动
 func (casbinService *CasbinService) UpdateCasbinApi(oldPath string, newPath string, oldMethod string, newMethod string) error {
 	err := global.GVA_DB.Model(&gormadapter.CasbinRule{}).Where("v1 = ? AND v2 = ?", oldPath, oldMethod).Updates(map[string]interface{}{
 		"v1": newPath,
@@ -61,12 +51,7 @@ func (casbinService *CasbinService) UpdateCasbinApi(oldPath string, newPath stri
 	return err
 }
 
-//@author: [piexlmax](https://github.com/piexlmax)
-//@function: GetPolicyPathByAuthorityId
-//@description: 获取权限列表
-//@param: authorityId string
-//@return: pathMaps []request.CasbinInfo
-
+//GetPolicyPathByAuthorityId 获取权限列表
 func (casbinService *CasbinService) GetPolicyPathByAuthorityId(AuthorityID uint) (pathMaps []request.CasbinInfo) {
 	e := casbinService.Casbin()
 	authorityId := strconv.Itoa(int(AuthorityID))
@@ -80,28 +65,19 @@ func (casbinService *CasbinService) GetPolicyPathByAuthorityId(AuthorityID uint)
 	return pathMaps
 }
 
-//@author: [piexlmax](https://github.com/piexlmax)
-//@function: ClearCasbin
-//@description: 清除匹配的权限
-//@param: v int, p ...string
-//@return: bool
-
+//ClearCasbin 清除匹配的权限
 func (casbinService *CasbinService) ClearCasbin(v int, p ...string) bool {
 	e := casbinService.Casbin()
 	success, _ := e.RemoveFilteredPolicy(v, p...)
 	return success
 }
 
-//@author: [piexlmax](https://github.com/piexlmax)
-//@function: Casbin
-//@description: 持久化到数据库  引入自定义规则
-//@return: *casbin.Enforcer
-
 var (
 	cachedEnforcer *casbin.CachedEnforcer
 	once           sync.Once
 )
 
+//Casbin 持久化到数据库  引入自定义规则
 func (casbinService *CasbinService) Casbin() *casbin.CachedEnforcer {
 	once.Do(func() {
 		a, _ := gormadapter.NewAdapterByDB(global.GVA_DB)

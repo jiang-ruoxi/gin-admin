@@ -10,12 +10,7 @@ import (
 
 type BaseMenuService struct{}
 
-//@author: [piexlmax](https://github.com/piexlmax)
-//@function: DeleteBaseMenu
-//@description: 删除基础路由
-//@param: id float64
-//@return: err error
-
+//DeleteBaseMenu 删除基础路由
 func (baseMenuService *BaseMenuService) DeleteBaseMenu(id int) (err error) {
 	err = global.GVA_DB.Preload("MenuBtn").Preload("Parameters").Where("parent_id = ?", id).First(&system.SysBaseMenu{}).Error
 	if err != nil {
@@ -41,12 +36,7 @@ func (baseMenuService *BaseMenuService) DeleteBaseMenu(id int) (err error) {
 	return err
 }
 
-//@author: [piexlmax](https://github.com/piexlmax)
-//@function: UpdateBaseMenu
-//@description: 更新路由
-//@param: menu model.SysBaseMenu
-//@return: err error
-
+//UpdateBaseMenu 更新路由
 func (baseMenuService *BaseMenuService) UpdateBaseMenu(menu system.SysBaseMenu) (err error) {
 	var oldMenu system.SysBaseMenu
 	upDateMap := make(map[string]interface{})
@@ -113,12 +103,7 @@ func (baseMenuService *BaseMenuService) UpdateBaseMenu(menu system.SysBaseMenu) 
 	return err
 }
 
-//@author: [piexlmax](https://github.com/piexlmax)
-//@function: GetBaseMenuById
-//@description: 返回当前选中menu
-//@param: id float64
-//@return: menu system.SysBaseMenu, err error
-
+// GetBaseMenuById 返回当前选中menu
 func (baseMenuService *BaseMenuService) GetBaseMenuById(id int) (menu system.SysBaseMenu, err error) {
 	err = global.GVA_DB.Preload("MenuBtn").Preload("Parameters").Where("id = ?", id).First(&menu).Error
 	return

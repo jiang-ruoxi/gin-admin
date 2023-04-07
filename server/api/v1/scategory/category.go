@@ -17,16 +17,7 @@ type CategoryApi struct {
 
 var categoryService = service.ServiceGroupApp.ScategoryServiceGroup.CategoryService
 
-
-// CreateCategory 创建Category
-// @Tags Category
-// @Summary 创建Category
-// @Security ApiKeyAuth
-// @accept application/json
-// @Produce application/json
-// @Param data body scategory.Category true "创建Category"
-// @Success 200 {string} string "{"success":true,"data":{},"msg":"获取成功"}"
-// @Router /category/createCategory [post]
+//CreateCategory 创建数据
 func (categoryApi *CategoryApi) CreateCategory(c *gin.Context) {
 	var category scategory.Category
 	err := c.ShouldBindJSON(&category)
@@ -49,15 +40,7 @@ func (categoryApi *CategoryApi) CreateCategory(c *gin.Context) {
 	}
 }
 
-// DeleteCategory 删除Category
-// @Tags Category
-// @Summary 删除Category
-// @Security ApiKeyAuth
-// @accept application/json
-// @Produce application/json
-// @Param data body scategory.Category true "删除Category"
-// @Success 200 {string} string "{"success":true,"data":{},"msg":"删除成功"}"
-// @Router /category/deleteCategory [delete]
+//DeleteCategory 删除记录
 func (categoryApi *CategoryApi) DeleteCategory(c *gin.Context) {
 	var category scategory.Category
 	err := c.ShouldBindJSON(&category)
@@ -73,15 +56,7 @@ func (categoryApi *CategoryApi) DeleteCategory(c *gin.Context) {
 	}
 }
 
-// DeleteCategoryByIds 批量删除Category
-// @Tags Category
-// @Summary 批量删除Category
-// @Security ApiKeyAuth
-// @accept application/json
-// @Produce application/json
-// @Param data body request.IdsReq true "批量删除Category"
-// @Success 200 {string} string "{"success":true,"data":{},"msg":"批量删除成功"}"
-// @Router /category/deleteCategoryByIds [delete]
+//DeleteCategoryByIds 批量删除
 func (categoryApi *CategoryApi) DeleteCategoryByIds(c *gin.Context) {
 	var IDS request.IdsReq
     err := c.ShouldBindJSON(&IDS)
@@ -97,15 +72,7 @@ func (categoryApi *CategoryApi) DeleteCategoryByIds(c *gin.Context) {
 	}
 }
 
-// UpdateCategory 更新Category
-// @Tags Category
-// @Summary 更新Category
-// @Security ApiKeyAuth
-// @accept application/json
-// @Produce application/json
-// @Param data body scategory.Category true "更新Category"
-// @Success 200 {string} string "{"success":true,"data":{},"msg":"更新成功"}"
-// @Router /category/updateCategory [put]
+//UpdateCategory 更新数据
 func (categoryApi *CategoryApi) UpdateCategory(c *gin.Context) {
 	var category scategory.Category
 	err := c.ShouldBindJSON(&category)
@@ -128,15 +95,7 @@ func (categoryApi *CategoryApi) UpdateCategory(c *gin.Context) {
 	}
 }
 
-// FindCategory 用id查询Category
-// @Tags Category
-// @Summary 用id查询Category
-// @Security ApiKeyAuth
-// @accept application/json
-// @Produce application/json
-// @Param data query scategory.Category true "用id查询Category"
-// @Success 200 {string} string "{"success":true,"data":{},"msg":"查询成功"}"
-// @Router /category/findCategory [get]
+//FindCategory 用查询数据
 func (categoryApi *CategoryApi) FindCategory(c *gin.Context) {
 	var category scategory.Category
 	err := c.ShouldBindQuery(&category)
@@ -152,15 +111,7 @@ func (categoryApi *CategoryApi) FindCategory(c *gin.Context) {
 	}
 }
 
-// GetCategoryList 分页获取Category列表
-// @Tags Category
-// @Summary 分页获取Category列表
-// @Security ApiKeyAuth
-// @accept application/json
-// @Produce application/json
-// @Param data query scategoryReq.CategorySearch true "分页获取Category列表"
-// @Success 200 {string} string "{"success":true,"data":{},"msg":"获取成功"}"
-// @Router /category/getCategoryList [get]
+//GetCategoryList 列表数据分页
 func (categoryApi *CategoryApi) GetCategoryList(c *gin.Context) {
 	var pageInfo scategoryReq.CategorySearch
 	err := c.ShouldBindQuery(&pageInfo)
@@ -181,15 +132,7 @@ func (categoryApi *CategoryApi) GetCategoryList(c *gin.Context) {
     }
 }
 
-// GetCategoryListAll 获取Category列表所有数据
-// @Tags Category
-// @Summary 分页获取Category列表
-// @Security ApiKeyAuth
-// @accept application/json
-// @Produce application/json
-// @Param data query scategoryReq.CategorySearch true "分页获取Category列表"
-// @Success 200 {string} string "{"success":true,"data":{},"msg":"获取成功"}"
-// @Router /category/getCategoryList [get]
+//GetCategoryListAll 所有数据
 func (categoryApi *CategoryApi) GetCategoryListAll(c *gin.Context) {
 	var pageInfo scategoryReq.CategorySearch
 	err := c.ShouldBindQuery(&pageInfo)

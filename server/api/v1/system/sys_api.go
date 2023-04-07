@@ -15,15 +15,7 @@ import (
 
 type SystemApiApi struct{}
 
-// CreateApi
-// @Tags      SysApi
-// @Summary   创建基础api
-// @Security  ApiKeyAuth
-// @accept    application/json
-// @Produce   application/json
-// @Param     data  body      system.SysApi                  true  "api路径, api中文描述, api组, 方法"
-// @Success   200   {object}  response.Response{msg=string}  "创建基础api"
-// @Router    /api/createApi [post]
+//CreateApi 创建数据
 func (s *SystemApiApi) CreateApi(c *gin.Context) {
 	var api system.SysApi
 	err := c.ShouldBindJSON(&api)
@@ -45,15 +37,7 @@ func (s *SystemApiApi) CreateApi(c *gin.Context) {
 	response.OkWithMessage("创建成功", c)
 }
 
-// DeleteApi
-// @Tags      SysApi
-// @Summary   删除api
-// @Security  ApiKeyAuth
-// @accept    application/json
-// @Produce   application/json
-// @Param     data  body      system.SysApi                  true  "ID"
-// @Success   200   {object}  response.Response{msg=string}  "删除api"
-// @Router    /api/deleteApi [post]
+//DeleteApi 删除数据
 func (s *SystemApiApi) DeleteApi(c *gin.Context) {
 	var api system.SysApi
 	err := c.ShouldBindJSON(&api)
@@ -75,15 +59,7 @@ func (s *SystemApiApi) DeleteApi(c *gin.Context) {
 	response.OkWithMessage("删除成功", c)
 }
 
-// GetApiList
-// @Tags      SysApi
-// @Summary   分页获取API列表
-// @Security  ApiKeyAuth
-// @accept    application/json
-// @Produce   application/json
-// @Param     data  body      systemReq.SearchApiParams                               true  "分页获取API列表"
-// @Success   200   {object}  response.Response{data=response.PageResult,msg=string}  "分页获取API列表,返回包括列表,总数,页码,每页数量"
-// @Router    /api/getApiList [post]
+//GetApiList 列表数据
 func (s *SystemApiApi) GetApiList(c *gin.Context) {
 	var pageInfo systemReq.SearchApiParams
 	err := c.ShouldBindJSON(&pageInfo)
@@ -110,15 +86,7 @@ func (s *SystemApiApi) GetApiList(c *gin.Context) {
 	}, "获取成功", c)
 }
 
-// GetApiById
-// @Tags      SysApi
-// @Summary   根据id获取api
-// @Security  ApiKeyAuth
-// @accept    application/json
-// @Produce   application/json
-// @Param     data  body      request.GetById                                   true  "根据id获取api"
-// @Success   200   {object}  response.Response{data=systemRes.SysAPIResponse}  "根据id获取api,返回包括api详情"
-// @Router    /api/getApiById [post]
+//GetApiById 查询数据
 func (s *SystemApiApi) GetApiById(c *gin.Context) {
 	var idInfo request.GetById
 	err := c.ShouldBindJSON(&idInfo)
@@ -140,15 +108,7 @@ func (s *SystemApiApi) GetApiById(c *gin.Context) {
 	response.OkWithDetailed(systemRes.SysAPIResponse{Api: api}, "获取成功", c)
 }
 
-// UpdateApi
-// @Tags      SysApi
-// @Summary   修改基础api
-// @Security  ApiKeyAuth
-// @accept    application/json
-// @Produce   application/json
-// @Param     data  body      system.SysApi                  true  "api路径, api中文描述, api组, 方法"
-// @Success   200   {object}  response.Response{msg=string}  "修改基础api"
-// @Router    /api/updateApi [post]
+//UpdateApi 更新数据
 func (s *SystemApiApi) UpdateApi(c *gin.Context) {
 	var api system.SysApi
 	err := c.ShouldBindJSON(&api)
@@ -170,14 +130,7 @@ func (s *SystemApiApi) UpdateApi(c *gin.Context) {
 	response.OkWithMessage("修改成功", c)
 }
 
-// GetAllApis
-// @Tags      SysApi
-// @Summary   获取所有的Api 不分页
-// @Security  ApiKeyAuth
-// @accept    application/json
-// @Produce   application/json
-// @Success   200  {object}  response.Response{data=systemRes.SysAPIListResponse,msg=string}  "获取所有的Api 不分页,返回包括api列表"
-// @Router    /api/getAllApis [post]
+//GetAllApis 获取所有数据
 func (s *SystemApiApi) GetAllApis(c *gin.Context) {
 	apis, err := apiService.GetAllApis()
 	if err != nil {
@@ -188,15 +141,7 @@ func (s *SystemApiApi) GetAllApis(c *gin.Context) {
 	response.OkWithDetailed(systemRes.SysAPIListResponse{Apis: apis}, "获取成功", c)
 }
 
-// DeleteApisByIds
-// @Tags      SysApi
-// @Summary   删除选中Api
-// @Security  ApiKeyAuth
-// @accept    application/json
-// @Produce   application/json
-// @Param     data  body      request.IdsReq                 true  "ID"
-// @Success   200   {object}  response.Response{msg=string}  "删除选中Api"
-// @Router    /api/deleteApisByIds [delete]
+//DeleteApisByIds 批量删除
 func (s *SystemApiApi) DeleteApisByIds(c *gin.Context) {
 	var ids request.IdsReq
 	err := c.ShouldBindJSON(&ids)

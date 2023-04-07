@@ -9,14 +9,9 @@ import (
 	"gorm.io/gorm"
 )
 
-//@author: [piexlmax](https://github.com/piexlmax)
-//@function: DeleteSysDictionary
-//@description: 创建字典数据
-//@param: sysDictionary model.SysDictionary
-//@return: err error
-
 type DictionaryService struct{}
 
+//DeleteSysDictionary 创建字典数据
 func (dictionaryService *DictionaryService) CreateSysDictionary(sysDictionary system.SysDictionary) (err error) {
 	if (!errors.Is(global.GVA_DB.First(&system.SysDictionary{}, "type = ?", sysDictionary.Type).Error, gorm.ErrRecordNotFound)) {
 		return errors.New("存在相同的type，不允许创建")
@@ -25,12 +20,7 @@ func (dictionaryService *DictionaryService) CreateSysDictionary(sysDictionary sy
 	return err
 }
 
-//@author: [piexlmax](https://github.com/piexlmax)
-//@function: DeleteSysDictionary
-//@description: 删除字典数据
-//@param: sysDictionary model.SysDictionary
-//@return: err error
-
+//DeleteSysDictionary 删除字典数据
 func (dictionaryService *DictionaryService) DeleteSysDictionary(sysDictionary system.SysDictionary) (err error) {
 	err = global.GVA_DB.Where("id = ?", sysDictionary.ID).Preload("SysDictionaryDetails").First(&sysDictionary).Error
 	if err != nil && errors.Is(err, gorm.ErrRecordNotFound) {
@@ -50,12 +40,7 @@ func (dictionaryService *DictionaryService) DeleteSysDictionary(sysDictionary sy
 	return
 }
 
-//@author: [piexlmax](https://github.com/piexlmax)
-//@function: UpdateSysDictionary
-//@description: 更新字典数据
-//@param: sysDictionary *model.SysDictionary
-//@return: err error
-
+//UpdateSysDictionary 更新字典数据
 func (dictionaryService *DictionaryService) UpdateSysDictionary(sysDictionary *system.SysDictionary) (err error) {
 	var dict system.SysDictionary
 	sysDictionaryMap := map[string]interface{}{
@@ -74,12 +59,7 @@ func (dictionaryService *DictionaryService) UpdateSysDictionary(sysDictionary *s
 	return err
 }
 
-//@author: [piexlmax](https://github.com/piexlmax)
-//@function: GetSysDictionary
-//@description: 根据id或者type获取字典单条数据
-//@param: Type string, Id uint
-//@return: err error, sysDictionary model.SysDictionary
-
+//GetSysDictionary 根据id或者type获取字典单条数据
 func (dictionaryService *DictionaryService) GetSysDictionary(Type string, Id uint, status *bool) (sysDictionary system.SysDictionary, err error) {
 	var flag = false
 	if status == nil {
@@ -91,13 +71,7 @@ func (dictionaryService *DictionaryService) GetSysDictionary(Type string, Id uin
 	return
 }
 
-//@author: [piexlmax](https://github.com/piexlmax)
-//@author: [SliverHorn](https://github.com/SliverHorn)
-//@function: GetSysDictionaryInfoList
-//@description: 分页获取字典列表
-//@param: info request.SysDictionarySearch
-//@return: err error, list interface{}, total int64
-
+//GetSysDictionaryInfoList 分页获取字典列表
 func (dictionaryService *DictionaryService) GetSysDictionaryInfoList(info request.SysDictionarySearch) (list interface{}, total int64, err error) {
 	limit := info.PageSize
 	offset := info.PageSize * (info.Page - 1)

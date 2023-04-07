@@ -125,12 +125,7 @@ type AutoCodeService struct{}
 
 var AutoCodeServiceApp = new(AutoCodeService)
 
-//@author: [songzhibin97](https://github.com/songzhibin97)
-//@function: PreviewTemp
-//@description: 预览创建代码
-//@param: model.AutoCodeStruct
-//@return: map[string]string, error
-
+//PreviewTemp 预览创建代码
 func (autoCodeService *AutoCodeService) PreviewTemp(autoCode system.AutoCodeStruct) (map[string]string, error) {
 	makeDictTypes(&autoCode)
 	for i := range autoCode.Fields {
@@ -218,12 +213,7 @@ func makeDictTypes(autoCode *system.AutoCodeStruct) {
 	}
 }
 
-//@author: [piexlmax](https://github.com/piexlmax)
-//@function: CreateTemp
-//@description: 创建代码
-//@param: model.AutoCodeStruct
-//@return: err error
-
+//CreateTemp 创建代码
 func (autoCodeService *AutoCodeService) CreateTemp(autoCode system.AutoCodeStruct, ids ...uint) (err error) {
 	makeDictTypes(&autoCode)
 	for i := range autoCode.Fields {
@@ -359,12 +349,7 @@ func (autoCodeService *AutoCodeService) CreateTemp(autoCode system.AutoCodeStruc
 	return nil
 }
 
-//@author: [piexlmax](https://github.com/piexlmax)
-//@function: GetAllTplFile
-//@description: 获取 pathName 文件夹下所有 tpl 文件
-//@param: pathName string, fileList []string
-//@return: []string, error
-
+//GetAllTplFile 获取 pathName 文件夹下所有 tpl 文件
 func (autoCodeService *AutoCodeService) GetAllTplFile(pathName string, fileList []string) ([]string, error) {
 	files, err := os.ReadDir(pathName)
 	for _, fi := range files {
@@ -382,12 +367,7 @@ func (autoCodeService *AutoCodeService) GetAllTplFile(pathName string, fileList 
 	return fileList, err
 }
 
-//@author: [piexlmax](https://github.com/piexlmax)
-//@function: GetDB
-//@description: 获取指定数据库和指定数据表的所有字段名,类型值等
-//@param: tableName string, dbName string
-//@return: err error, Columns []request.ColumnReq
-
+//DropTable 获取指定数据库和指定数据表的所有字段名,类型值等
 func (autoCodeService *AutoCodeService) DropTable(BusinessDb, tableName string) error {
 	if BusinessDb != "" {
 		return global.MustGetGlobalDBByDBName(BusinessDb).Exec("DROP TABLE " + tableName).Error
@@ -396,13 +376,7 @@ func (autoCodeService *AutoCodeService) DropTable(BusinessDb, tableName string) 
 	}
 }
 
-//@author: [SliverHorn](https://github.com/SliverHorn)
-//@author: [songzhibin97](https://github.com/songzhibin97)
-//@function: addAutoMoveFile
-//@description: 生成对应的迁移文件路径
-//@param: *tplData
-//@return: null
-
+//addAutoMoveFile 生成对应的迁移文件路径
 func (autoCodeService *AutoCodeService) addAutoMoveFile(data *tplData) {
 	base := filepath.Base(data.autoCodePath)
 	fileSlice := strings.Split(data.autoCodePath, string(os.PathSeparator))
@@ -441,13 +415,7 @@ func (autoCodeService *AutoCodeService) addAutoMoveFile(data *tplData) {
 	}
 }
 
-//@author: [piexlmax](https://github.com/piexlmax)
-//@author: [SliverHorn](https://github.com/SliverHorn)
-//@function: CreateApi
-//@description: 自动创建api数据,
-//@param: a *model.AutoCodeStruct
-//@return: err error
-
+//CreateApi 自动创建api数据
 func (autoCodeService *AutoCodeService) AutoCreateApi(a *system.AutoCodeStruct) (ids []uint, err error) {
 	apiList := []system.SysApi{
 		{

@@ -12,15 +12,7 @@ import (
 
 type CasbinApi struct{}
 
-// UpdateCasbin
-// @Tags      Casbin
-// @Summary   更新角色api权限
-// @Security  ApiKeyAuth
-// @accept    application/json
-// @Produce   application/json
-// @Param     data  body      request.CasbinInReceive        true  "权限id, 权限模型列表"
-// @Success   200   {object}  response.Response{msg=string}  "更新角色api权限"
-// @Router    /casbin/UpdateCasbin [post]
+// UpdateCasbin 更新角色api权限
 func (cas *CasbinApi) UpdateCasbin(c *gin.Context) {
 	var cmr request.CasbinInReceive
 	err := c.ShouldBindJSON(&cmr)
@@ -42,15 +34,7 @@ func (cas *CasbinApi) UpdateCasbin(c *gin.Context) {
 	response.OkWithMessage("更新成功", c)
 }
 
-// GetPolicyPathByAuthorityId
-// @Tags      Casbin
-// @Summary   获取权限列表
-// @Security  ApiKeyAuth
-// @accept    application/json
-// @Produce   application/json
-// @Param     data  body      request.CasbinInReceive                                          true  "权限id, 权限模型列表"
-// @Success   200   {object}  response.Response{data=systemRes.PolicyPathResponse,msg=string}  "获取权限列表,返回包括casbin详情列表"
-// @Router    /casbin/getPolicyPathByAuthorityId [post]
+// GetPolicyPathByAuthorityId 获取权限列表
 func (cas *CasbinApi) GetPolicyPathByAuthorityId(c *gin.Context) {
 	var casbin request.CasbinInReceive
 	err := c.ShouldBindJSON(&casbin)

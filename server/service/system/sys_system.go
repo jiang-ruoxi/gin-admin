@@ -19,13 +19,7 @@ func (systemConfigService *SystemConfigService) GetSystemConfig() (conf config.S
 	return global.GVA_CONFIG, nil
 }
 
-// @description   set system config,
-//@author: [piexlmax](https://github.com/piexlmax)
-//@function: SetSystemConfig
-//@description: 设置配置文件
-//@param: system model.System
-//@return: err error
-
+//SetSystemConfig 设置配置文件
 func (systemConfigService *SystemConfigService) SetSystemConfig(system system.System) (err error) {
 	cs := utils.StructToMap(system.Config)
 	for k, v := range cs {
@@ -35,11 +29,7 @@ func (systemConfigService *SystemConfigService) SetSystemConfig(system system.Sy
 	return err
 }
 
-//@author: [SliverHorn](https://github.com/SliverHorn)
-//@function: GetServerInfo
-//@description: 获取服务器信息
-//@return: server *utils.Server, err error
-
+//GetServerInfo 获取服务器信息
 func (systemConfigService *SystemConfigService) GetServerInfo() (server *utils.Server, err error) {
 	var s utils.Server
 	s.Os = utils.InitOS()

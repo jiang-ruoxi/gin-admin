@@ -16,15 +16,7 @@ import (
 	"go.uber.org/zap"
 )
 
-// BreakpointContinue
-// @Tags      ExaFileUploadAndDownload
-// @Summary   断点续传到服务器
-// @Security  ApiKeyAuth
-// @accept    multipart/form-data
-// @Produce   application/json
-// @Param     file  formData  file                           true  "an example for breakpoint resume, 断点续传示例"
-// @Success   200   {object}  response.Response{msg=string}  "断点续传到服务器"
-// @Router    /fileUploadAndDownload/breakpointContinue [post]
+//BreakpointContinue 断点续传到服务器
 func (b *FileUploadAndDownloadApi) BreakpointContinue(c *gin.Context) {
 	fileMd5 := c.Request.FormValue("fileMd5")
 	fileName := c.Request.FormValue("fileName")
@@ -76,15 +68,7 @@ func (b *FileUploadAndDownloadApi) BreakpointContinue(c *gin.Context) {
 	response.OkWithMessage("切片创建成功", c)
 }
 
-// FindFile
-// @Tags      ExaFileUploadAndDownload
-// @Summary   查找文件
-// @Security  ApiKeyAuth
-// @accept    multipart/form-data
-// @Produce   application/json
-// @Param     file  formData  file                                                        true  "Find the file, 查找文件"
-// @Success   200   {object}  response.Response{data=exampleRes.FileResponse,msg=string}  "查找文件,返回包括文件详情"
-// @Router    /fileUploadAndDownload/findFile [post]
+//FindFile 查找文件
 func (b *FileUploadAndDownloadApi) FindFile(c *gin.Context) {
 	fileMd5 := c.Query("fileMd5")
 	fileName := c.Query("fileName")
@@ -98,15 +82,7 @@ func (b *FileUploadAndDownloadApi) FindFile(c *gin.Context) {
 	}
 }
 
-// BreakpointContinueFinish
-// @Tags      ExaFileUploadAndDownload
-// @Summary   创建文件
-// @Security  ApiKeyAuth
-// @accept    multipart/form-data
-// @Produce   application/json
-// @Param     file  formData  file                                                            true  "上传文件完成"
-// @Success   200   {object}  response.Response{data=exampleRes.FilePathResponse,msg=string}  "创建文件,返回包括文件路径"
-// @Router    /fileUploadAndDownload/findFile [post]
+//BreakpointContinueFinish 创建文件
 func (b *FileUploadAndDownloadApi) BreakpointContinueFinish(c *gin.Context) {
 	fileMd5 := c.Query("fileMd5")
 	fileName := c.Query("fileName")
@@ -119,15 +95,7 @@ func (b *FileUploadAndDownloadApi) BreakpointContinueFinish(c *gin.Context) {
 	}
 }
 
-// RemoveChunk
-// @Tags      ExaFileUploadAndDownload
-// @Summary   删除切片
-// @Security  ApiKeyAuth
-// @accept    multipart/form-data
-// @Produce   application/json
-// @Param     file  formData  file                           true  "删除缓存切片"
-// @Success   200   {object}  response.Response{msg=string}  "删除切片"
-// @Router    /fileUploadAndDownload/removeChunk [post]
+//RemoveChunk 删除切片
 func (b *FileUploadAndDownloadApi) RemoveChunk(c *gin.Context) {
 	var file example.ExaFile
 	err := c.ShouldBindJSON(&file)

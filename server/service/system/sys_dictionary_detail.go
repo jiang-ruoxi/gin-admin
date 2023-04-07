@@ -6,58 +6,34 @@ import (
 	"github.com/flipped-aurora/gin-vue-admin/server/model/system/request"
 )
 
-//@author: [piexlmax](https://github.com/piexlmax)
-//@function: CreateSysDictionaryDetail
-//@description: 创建字典详情数据
-//@param: sysDictionaryDetail model.SysDictionaryDetail
-//@return: err error
 
 type DictionaryDetailService struct{}
 
+//CreateSysDictionaryDetail 创建字典详情数据
 func (dictionaryDetailService *DictionaryDetailService) CreateSysDictionaryDetail(sysDictionaryDetail system.SysDictionaryDetail) (err error) {
 	err = global.GVA_DB.Create(&sysDictionaryDetail).Error
 	return err
 }
 
-//@author: [piexlmax](https://github.com/piexlmax)
-//@function: DeleteSysDictionaryDetail
-//@description: 删除字典详情数据
-//@param: sysDictionaryDetail model.SysDictionaryDetail
-//@return: err error
-
+//DeleteSysDictionaryDetail 删除字典详情数据
 func (dictionaryDetailService *DictionaryDetailService) DeleteSysDictionaryDetail(sysDictionaryDetail system.SysDictionaryDetail) (err error) {
 	err = global.GVA_DB.Delete(&sysDictionaryDetail).Error
 	return err
 }
 
-//@author: [piexlmax](https://github.com/piexlmax)
-//@function: UpdateSysDictionaryDetail
-//@description: 更新字典详情数据
-//@param: sysDictionaryDetail *model.SysDictionaryDetail
-//@return: err error
-
+//UpdateSysDictionaryDetail 更新字典详情数据
 func (dictionaryDetailService *DictionaryDetailService) UpdateSysDictionaryDetail(sysDictionaryDetail *system.SysDictionaryDetail) (err error) {
 	err = global.GVA_DB.Save(sysDictionaryDetail).Error
 	return err
 }
 
-//@author: [piexlmax](https://github.com/piexlmax)
-//@function: GetSysDictionaryDetail
-//@description: 根据id获取字典详情单条数据
-//@param: id uint
-//@return: sysDictionaryDetail system.SysDictionaryDetail, err error
-
+//GetSysDictionaryDetail 根据id获取字典详情单条数据
 func (dictionaryDetailService *DictionaryDetailService) GetSysDictionaryDetail(id uint) (sysDictionaryDetail system.SysDictionaryDetail, err error) {
 	err = global.GVA_DB.Where("id = ?", id).First(&sysDictionaryDetail).Error
 	return
 }
 
-//@author: [piexlmax](https://github.com/piexlmax)
-//@function: GetSysDictionaryDetailInfoList
-//@description: 分页获取字典详情列表
-//@param: info request.SysDictionaryDetailSearch
-//@return: list interface{}, total int64, err error
-
+//GetSysDictionaryDetailInfoList 分页获取字典详情列表
 func (dictionaryDetailService *DictionaryDetailService) GetSysDictionaryDetailInfoList(info request.SysDictionaryDetailSearch) (list interface{}, total int64, err error) {
 	limit := info.PageSize
 	offset := info.PageSize * (info.Page - 1)
