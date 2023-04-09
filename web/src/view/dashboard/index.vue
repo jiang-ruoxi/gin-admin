@@ -10,35 +10,6 @@
       </div>
     </div>
     <div class="gva-card-box">
-      <el-card class="gva-card quick-entrance">
-        <template #header>
-          <div class="card-header">
-            <span>快捷入口</span>
-          </div>
-        </template>
-        <el-row :gutter="20">
-          <el-col
-            v-for="(card, key) in toolCards"
-            :key="key"
-            :span="4"
-            :xs="8"
-            class="quick-entrance-items"
-            @click="toTarget(card.name)"
-          >
-            <div class="quick-entrance-item">
-              <div class="quick-entrance-item-icon" :style="{ backgroundColor: card.bg }">
-                <el-icon>
-                  <component :is="card.icon" :style="{ color: card.color }" />
-                </el-icon>
-              </div>
-              <p>{{ card.label }}</p>
-            </div>
-          </el-col>
-        </el-row>
-      </el-card>
-    <!-- <div class="quick-entrance-title"></div> -->
-    </div>
-    <div class="gva-card-box">
 
     </div>
   </div>
